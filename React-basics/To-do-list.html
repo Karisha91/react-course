@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>React Basics</title>
+    <style>
+      body {
+        background-color: darkgray;
+      }
+      .to-do.list {
+        font-family: Arial;
+        text-align: center;
+        margin-top: 100px;
+
+      }
+      h1 {
+        font-size: 4rem;
+        color: white;
+      }
+      button {
+        font-size: 1.7rem;
+        font-weight: bold;
+        padding: 10px 20px;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.5s ease;
+      }
+      .add-button {
+        background-color: green;
+
+      }
+      .add-button:hover {
+        background-color: darkgreen
+        
+      }
+      .delete-button {
+        background-color: red
+      }
+      .delete-button:hover {
+        background-color: darkred
+        
+      }
+      .move-button {
+        background-color: blue
+      }
+      .move-button:hover {
+        background-color: darkblue
+        
+      }
+      input[type="text"] {
+        font-size: 1.6rem;
+        padding: 10px;
+        border: 2px solid;
+        border-radius: 5x;
+        color: black
+      }
+      ol{
+        padding: 0;
+
+      }
+
+      li {
+        font-size: 2rem;
+        font-weight: bold;
+        padding: 15px;
+        background-color: beige;
+        margin-bottom: 10px;
+        border: 3px solid;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+      }
+      .text {
+        flex: 1;
+      }
+      .delete-button, .move-button {
+        padding: 8px 12px;
+        font-size: 1.4rem;
+        margin-left- 
+      }
+    </style>
+  </head>
+  <body>
+    <div class="js-container"></div>
+
+    <script src="https://unpkg.com/supersimpledev/dayjs.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+    
+    <script type="text/babel">
+      const { useState } = React;
+
+      function ToDoList() {
+        const [tasks, setTasks] = useState(["Eat breakfast","Take a shower","Walk the dog"]);
+        const [newTask, setNewTask] = useState("");
+
+
+        function handleInputChange(event) {
+          setNewTask(event.target.value)
+        }
+
+        function addTask(){
+          if(newTask.trim() !== "") {
+            setTasks(t => [...tasks, newTask]);
+          setNewTask('')
+          }
+          
+        }
+
+        function deleteTask(index) {
+          const updatedTasks = tasks.filter((_, i) => i !== index)
+          setTasks(updatedTasks);
+        }
+
+        function moveTaskUp(index) {
+          if(index > 0) {
+            const updatedTasks = [...tasks];
+            [updatedTasks[index],updatedTasks[index -1]] = [updatedTasks[index - 1],updatedTasks[index]]
+            setTasks(updatedTasks)
+          }
+        }
+        function moveTaskDown(index) {
+          if(index < tasks.length - 1) {
+            const updatedTasks = [...tasks];
+            [updatedTasks[index],updatedTasks[index + 1]] = [updatedTasks[index + 1],updatedTasks[index]]
+            setTasks(updatedTasks)
+          }
+        }
+        return (
+          <div className="to-do-list">
+            <h1>To-Do-List</h1>
+              <div>
+                <input 
+                type="text"
+                placeholder= "Enter task"
+                value={newTask}
+                onChange={handleInputChange}
+                />
+                <button 
+                className="add-button"
+                onClick={addTask}>Add</button>
+                </div>
+
+                <ol>
+                  {tasks.map((task, index) => 
+                  <li key={index}>
+                    <span className="text">{task}</span>
+                    <button className="delete-button" onClick={() => deleteTask(index)}>Delete</button>
+                    <button className="move-button" onClick={() => moveTaskUp(index)}>Up</button>
+                    <button className="move-button" onClick={() => moveTaskDown(index)}>Down</button>
+                    </li>
+                  )}
+                  </ol>
+          </div>)
+
+      }
+
+      function App() {
+
+        return (<div>
+          <ToDoList />
+          </div>)
+      }
+
+
+        
+
+      const container = document.querySelector('.js-container');
+      const root = ReactDOM.createRoot(container);
+      root.render(<App />);
+      
+    </script>
+  </body>
+</html>

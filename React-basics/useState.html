@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>React Basics</title>
+  </head>
+  <body>
+    <div class="js-container"></div>
+
+    <script src="https://unpkg.com/supersimpledev/dayjs.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+    
+    <script type="text/babel">
+      const { useState } = React;
+      
+      // function Counter(props) {
+       
+      
+        
+      //  const [count, setCount] =  useState(props.initialCount || 0)
+      //  const [theme, setTheme] = useState('Blue')
+       
+        
+      // function decrement() {
+      //   setCount(prevCount => prevCount - 1)
+      //   setTheme(theme => 'Red')
+      // }
+      // function increment() {
+      //   setCount(prevCount => prevCount + 1)
+      //   setTheme(prevTheme => 'Black')
+      // }
+        
+      //   return (
+      //     <>
+      //       <button onClick={decrement}>-</button>
+      //       <span>{count}</span>
+      //       <span>{theme}</span>
+      //       <button onClick={increment}>+</button>
+      //     </>
+      //   );
+      // }
+
+      // function App() {
+      //   return (
+      //       <div style={{ display: 'flex', gap: '20px' }}>
+      //         <Counter initialCount={10}/>
+      //         <Counter />
+      //       </div>
+      //   )
+      // }
+      
+        // function MyComponent() {
+        //   const [car, setCar] = useState({
+        //     name: 'Giulietta',
+        //     brand: 'Alfa Romeo',
+        //     year: 2010
+        //   })
+
+
+        //   function handleYear(event) {
+        //     setCar(c => ({...car, year: event.target.value}))
+        //   }
+
+        //   function handleBrand(event) {
+        //     setCar(c => ({...car, brand: event.target.value}))
+        //   }
+        //   return (
+        //     <>
+        //       <p>My favorite car: {car.brand} {car.name} ({car.year})</p>
+
+        //       <input type="number" value={car.year} onChange={handleYear}/><br/>
+        //       <input type="text" value={car.name}/><br/>
+        //       <input type="text" value={car.brand} onChange={handleBrand}/><br/>
+        //     </>)
+        // }
+
+
+
+
+        // function MyComponent() {
+        //   const [foods, setFoods] = useState(["apple","orange","banana"])
+        //   const [newFood, setNewFood] = useState("");
+
+
+        //   function handleAddFood() {
+        //     setFoods([...foods, newFood]);
+        //     setNewFood("");
+        //   }
+
+        //   function handleRemoveFood(index) {
+        //     const updatedFoods = [...foods];
+        //     updatedFoods.splice(index, 1);
+        //     setFoods(updatedFoods)
+        //   }
+        //     return (
+        //       <div>
+        //         <h2>List of food</h2>
+        //         <ul>
+        //           {foods.map((food, index) => (<li key={index}>{food}
+        //             <button onClick={() => handleRemoveFood(index)}>Remove</button>
+        //             </li>))}
+        //           </ul>
+        //           <input 
+        //           type="text" 
+        //           value={newFood} 
+        //           placeholder="Enter food name"
+        //           onChange={(e) => setNewFood(e.target.value)}
+        //           />
+        //           <button onClick={handleAddFood}>Add food</button>
+        //       </div>
+        //     )
+        // }
+
+
+          // function MyComponent() {
+          //   const [food, setFood] = useState(["apple", "banana", "orange"])
+          //   const [inputValue, setInputValue] = useState("")
+            
+
+          //   function addFood(){
+          //     setFood([...food, inputValue]);
+          //     setInputValue("")
+              
+          //   }
+
+          //   function removeFood(index) {
+          //     const updateFoods = food.filter((_, i) => i !== index)
+
+          //     setFood(updateFoods)
+          //   }
+
+          //   return (
+          //     <div>
+          //       <h2>List of food</h2>
+          //       <ul>
+          //         {food.map((food, index) => (
+          //           <li key={index}
+          //           >{food}
+          //           <button onClick={() => removeFood(index)}>Remove</button>
+          //           </li>
+          //         ))}
+          //       </ul>
+          //       <input 
+          //       type="text"
+          //       placeholder="Enter food"
+          //       value={inputValue}
+          //       onChange={(event) => setInputValue(event.target.value)}/>
+          //       <button onClick={addFood}>Add food</button>
+          //     </div>)
+          // }
+
+
+            function MyComponent() {
+              const [car, setCar] = useState([]);
+              const [carYear, setCarYear] = useState(new Date().getFullYear())
+              const [carMake, setCarMake] = useState("")
+              const [carModel, setCarModel] = useState("")
+
+
+            function handleAddCar() {
+              const newCar = { year: carYear, make: carMake, model: carModel };
+              setCar([...car, newCar])
+            }
+
+            function handleRemoveCar(index) {
+
+            }
+
+            function handleCarYear(event) {
+              setCarYear(event.target.value)
+            }
+            
+            function  handleCarMake(event) {
+              setCarMake(event.target.value)
+            }
+
+            function handleCarModel(event) {
+              setCarModel(event.target.value)
+            }
+              return (<div>
+                      <h2>List of cars</h2>
+                        <ul>
+                        {car.map((car, index) => (<li key={index}>{car.year} {car.make} {car.model}</li>))}
+                        </ul>
+                      <input 
+                      type="number"
+                      value= {carYear}
+                      onChange={handleCarYear}/><br/>
+                      <input 
+                      type="text" 
+                      placeholder="Enter car make"
+                      onChange={handleCarMake}/><br/>
+                      <input 
+                      type="text" 
+                      placeholder="Enter car model"
+                      onChange={handleCarModel}/><br/>
+                      <button onClick={handleAddCar}>Add car</button>
+                  </div>)
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        function App() {
+
+          return (<MyComponent />)
+        }
+
+      const container = document.querySelector('.js-container');
+      const root = ReactDOM.createRoot(container);
+      root.render(<App />);
+      
+    </script>
+  </body>
+</html>
