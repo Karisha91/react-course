@@ -1,4 +1,4 @@
-import './checkout-header.css'
+import { CheckoutHeader } from './CheckoutHeader';
 import './CheckoutPage.css';
 
 function CheckoutPage() {
@@ -6,7 +6,7 @@ function CheckoutPage() {
     <>
     <title>Checkout</title>
 
-      
+     <CheckoutHeader />
 
       <div className="checkout-page">
         <div className="page-title">Review your order</div>
