@@ -46,6 +46,12 @@
 .header .mobile-logo {
   display: none;
 }
+.orders-link.active {
+  text-decoration: underline;
+  /* Add any other active state styles */
+}
+
+
 
 @media (max-width: 675px) {
   .header .logo {
