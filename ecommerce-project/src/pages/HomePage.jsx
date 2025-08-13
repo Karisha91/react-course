@@ -6,18 +6,18 @@ import axios from 'axios';
 
 function HomePage() {
   const [products, setProducts] = useState([]);
-  const [cartItems, setCartItems] = useState([]);
+  const [cart, setcart] = useState([]);
 
   // Fetch products from the API when the component mounts  
 
   useEffect(() => {
-         axios.get('http://localhost:3000/api/products').then((response) => {
+         axios.get('/api/products').then((response) => {
           setProducts(response.data);
         }).catch((error) => {
           console.error('Error fetching products:', error);
         });
-        axios.get('http://localhost:3000/api/cart-items').then((response) => {
-         setCartItems(response.data);
+        axios.get('/api/cart-items').then((response) => {
+         setcart(response.data);
           
         }).catch((error) => {
           console.error('Error fetching cart items:', error);
@@ -30,7 +30,7 @@ function HomePage() {
     <title>Ecommerce Project</title>
     <link rel="icon" type="image/svg+xml" href="home-favicon.png" />
 
-    <Header cart={cartItems} />
+    <Header cart={cart} />
       
 
     <div className="home-page">
