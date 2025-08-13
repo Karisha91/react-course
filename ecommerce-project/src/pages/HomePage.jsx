@@ -3,19 +3,18 @@ import CheckmarkIcon from '../assets/images/icons/checkmark.png';
 import './HomePage.css';
 import { products } from '../../starting-code/data/products'; 
 import { useEffect } from 'react';
+import axios from 'axios';
 
 function HomePage() {
 
   useEffect(() => {
-    fetch('http://localhost:3000/api/products').then((response) => {
-      response.json().then((data) => {
-        // Assuming the API returns an array of products
-        // You can set the products state here if you have a state management solution
-        console.log(data);
-      });
+    axios.get('http://localhost:3000/api/products').then((response) => {
+      console.log(response.data);
+    }).catch((error) => {
+      console.error('Error fetching products:', error);
     });
   }, []);
-
+  
   return (
     <>
     <title>Ecommerce Project</title>
