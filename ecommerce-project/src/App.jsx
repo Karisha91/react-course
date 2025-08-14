@@ -6,7 +6,7 @@ import HomePage from './pages/home/HomePage'
 import CheckoutPage from './pages/checkout/CheckoutPage';
 import Orders from './pages/orders/Orders';
 import './App.css'
-import { use, useEffect,useState } from 'react';
+import { useEffect ,useState } from 'react';
 
 function App() {
   const [cart, setcart] = useState([]);
