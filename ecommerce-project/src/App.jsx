@@ -6,20 +6,19 @@ import HomePage from './pages/home/HomePage'
 import CheckoutPage from './pages/checkout/CheckoutPage';
 import Orders from './pages/orders/Orders';
 import './App.css'
-import { useEffect,useState } from 'react';
+import { use, useEffect,useState } from 'react';
 
 function App() {
   const [cart, setcart] = useState([]);
   useEffect(() => {
-    axios.get('/api/cart-items?expand=product').then((response) => {
+    const fetchCart = async () => {
+     const response = await axios.get('/api/cart-items?expand=product')
          setcart(response.data);
-          
-        }).catch((error) => {
-          console.error('Error fetching cart items:', error);
-        });
-      }, []);
-
-  return (
+    
+    };
+    fetchCart();  
+  } , []);
+  return (  
     <>
     <Routes>
       <Route path="/" element={<HomePage cart={cart}/>} />

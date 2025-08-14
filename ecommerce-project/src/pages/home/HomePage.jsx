@@ -12,12 +12,11 @@ function HomePage({ cart }) {
   // Fetch products from the API when the component mounts  
 
   useEffect(() => {
-         axios.get('/api/products').then((response) => {
+    const fetchProducts = async () => {
+      const response = await axios.get('/api/products')
           setProducts(response.data);
-        }).catch((error) => {
-          console.error('Error fetching products:', error);
-        });
-        
+    };
+       fetchProducts();
   }, []);
   
 
