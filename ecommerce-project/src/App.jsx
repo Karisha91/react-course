@@ -7,6 +7,7 @@ import CheckoutPage from './pages/checkout/CheckoutPage';
 import Orders from './pages/orders/Orders';
 import './App.css'
 import { useEffect, useState } from 'react';
+window.axios = axios;
 
 function App() {
   
