@@ -15,4 +15,13 @@ describe('formatMoney', () => {
 
 
   });
+
+
+  it('formats 0 cents as $0.00', () => {
+    expect(formatMoney(0)).toBe('$0.00');
+  });
+  it('works with negative values', () => {
+    expect(formatMoney(-999)).toBe('-$9.99');
+    expect(formatMoney(-1234)).toBe('-$12.34');
+  })
 });
