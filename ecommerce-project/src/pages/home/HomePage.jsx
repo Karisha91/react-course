@@ -1,5 +1,5 @@
 import Header from '../../components/Header';
-import { useSearchParams } from 'react-router';
+import { useSearchParams } from 'react-router-dom';
 import './HomePage.css';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
