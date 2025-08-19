@@ -3,6 +3,7 @@ import { MemoryRouter } from 'react-router-dom'; // Fixed import
 import HomePage from './HomePage';
 import { render , screen, within} from '@testing-library/react'; // Added waitFor
 import axios from 'axios';
+import userEvent from '@testing-library/user-event';
 
 
 
@@ -14,7 +15,7 @@ vi.mock('../../components/Header', () => ({
 vi.mock('axios');
 
 describe('HomePage Component', () => {
-
+  let user;
   let loadCart;
   beforeEach(() => {
 
@@ -47,6 +48,7 @@ describe('HomePage Component', () => {
         }
       }
     })
+    user = userEvent.setup();
   });
 
   it('renders HomePage with products',async () => {
@@ -65,4 +67,21 @@ describe('HomePage Component', () => {
     within(productContainers[0]).getByText('87');
     within(productContainers[0]).getByText('$10.90');
   });
+
+  it('adds product to cart', async () => {
+    render(
+      <MemoryRouter>
+        <HomePage cart={[]} loadCart={loadCart} />
+      </MemoryRouter>
+    );
+    const productContainers = await screen.findAllByTestId('product-container');
+    const addToCartButton = within(productContainers[0]).getByTestId('add-to-cart-button');
+    await user.click(addToCartButton);
+    expect(axios.post).toHaveBeenCalledWith('/api/cart-items', {
+      productId: 'e43638ce-6aa0-4b85-b27f-e1d07eb678c6',
+      quantity: 1
+    });
+    expect(loadCart).toHaveBeenCalled();
+  });
+
 });
